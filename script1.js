@@ -50,10 +50,10 @@ function addPagination(){
     pagination.innerHTML = "";
     for(let i = 0; i < totalPages; i++){
         const page = document.createElement("button");
-        page.textContent = i;
+        page.innerText = i+1;
         page.classList.add("btn");
         pagination.append(page);
-        pages.push(page); // or use spread --> pages = [...pages, page];
+        pages = [...pages, page];   // or use spread --> pages = [...pages, page];
     }
 
     addEventListenersToPages();
@@ -81,24 +81,19 @@ function addEventListenersToPages(){
 }
 
 function setActive(){
-    prev.style.backgroundColor = curr === 1 ? "rgb(48, 111, 212)" : "white";
-    next.style.backgroundColor = curr === totalPages ? "rgb(48, 111, 212)" : "white";
-    prev.style.pointerEvents = curr === 1 ? "none" : "all";
-    next.style.pointerEvents = curr === totalPages ? "none" : "all";
-
-    // if(curr === 1){
-    //     prev.style.visibility = "hidden";
-    // }
-    // else{
-    //     prev.style.visibility = "visible";
-    // }
-
-    // if(curr === totalPages){
-    //     next.style.visibility = "hidden";
-    // }
-    // else{
-    //     next.style.visibility = "visible";
-    // }
+    if(curr === 1){
+        prev.style.display = "none";
+    }
+    else{
+        prev.style.display = "block";
+    }
+    if(curr === totalPages){
+        next.style.display = "none";
+    }
+    else{
+        next.style.display = "block";
+    }
+   
     pages.forEach((page) => {
         page.classList.remove("active")
     });
